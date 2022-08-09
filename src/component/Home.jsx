@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Slider from "react-slick";
@@ -10,10 +10,11 @@ import "react-loading-skeleton/dist/skeleton.css";
 export default function Home() {
   const data = useSelector((state) => state.productReducer.productList);
   const [loading, setLoading] = useState(false);
+  const componentMounted = useRef(true);
 
   const dispatch = useDispatch();
 
-  let componentMounted = true;
+  // let componentMounted = true;
 
   useEffect(() => {
     const getProducts = async () => {
@@ -25,10 +26,11 @@ export default function Home() {
         setLoading(false);
       }
       return () => {
-        componentMounted = false;
+        componentMounted.current = false;
       };
     };
     if (!data.length) getProducts();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
