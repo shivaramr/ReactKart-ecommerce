@@ -7,7 +7,7 @@ export default function Cart() {
   const dispatch = useDispatch();
 
   const totalCost = useMemo(
-    () => state.reduce((a, b) => a + b.price * b.qty, 0),
+    () => state.reduce((a, b) => a + b.price * b.qty, 0).toFixed(2),
     [state]
   );
 
