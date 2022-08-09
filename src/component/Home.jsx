@@ -30,7 +30,7 @@ export default function Home() {
     };
     if (!data.length) getProducts();
   }, []);
-  console.log({ data });
+
   return (
     <div className="hero">
       <div className="card bg-dark text-white border-0">
