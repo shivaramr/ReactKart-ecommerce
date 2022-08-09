@@ -14,8 +14,6 @@ export default function Home() {
 
   const dispatch = useDispatch();
 
-  // let componentMounted = true;
-
   useEffect(() => {
     const getProducts = async () => {
       setLoading(true);

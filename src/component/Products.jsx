@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProductsList } from "../redux/action";
@@ -13,9 +13,8 @@ export default function Products() {
   const [filter, setFilter] = useState(data);
   const [loading, setLoading] = useState(false);
   const [selectedCat, setSelectedCat] = useState(productCat.all);
+  const componentMounted = useRef(true);
   const dispatch = useDispatch();
-
-  let componentMounted = true;
 
   useEffect(() => {
     const getProducts = async () => {
@@ -28,10 +27,11 @@ export default function Products() {
         setLoading(false);
       }
       return () => {
-        componentMounted = false;
+        componentMounted.current = false;
       };
     };
     if (!data.length) getProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const Loading = () => {

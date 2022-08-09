@@ -26,6 +26,7 @@ export default function Product() {
       setLoading(false);
     };
     if (`${product.id}` !== id) getProduct();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const Loading = () => {
